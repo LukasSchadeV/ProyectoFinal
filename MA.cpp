@@ -10,6 +10,8 @@
 
 using namespace std;
 
+//Funcion encargada de medir la memoria utilizada por el codigo, propuesta por windows
+// https://learn.microsoft.com/en-us/windows/win32/psapi/collecting-memory-usage-information-for-a-process
 void GetMemoryUsage() {
     PROCESS_MEMORY_COUNTERS_EX pmc;
     if (GetProcessMemoryInfo(GetCurrentProcess(), reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&pmc), sizeof(pmc))) {
@@ -24,7 +26,7 @@ void contarParesImpares(const vector<vector<int>>& matriz, int& pares, int& impa
         for (int j = 0; j < n; j++) {
             if (matriz[i][j] != 0 && matriz[i][j] % 2 == 0) { // Decidir si es par, y excluir el 0
                 pares++;
-            } else if (matriz[i][j] != 0) { // Impares && matriz[i][j] != 1
+            } else if (matriz[i][j] != 0) { // Impares // se le puede añadir (&& matriz[i][j] != 1) para verificar los distintos de 1 
                 impares++;
             }
         }
@@ -61,7 +63,7 @@ int main() {
         // Crear conexiones para el conjunto de autores en la línea actual
         for (int i = 0; i < nombresAutores.size(); i++) {
             for (int j = i + 1; j < nombresAutores.size(); j++) {
-                conexiones[nombresAutores[i]].emplace_back(nombresAutores[j], 1);
+                conexiones[nombresAutores[i]].emplace_back(nombresAutores[j], 1); //La función emplace_back se utiliza en C++ para agregar un elemento al final de un vector o lista de manera eficiente
                 conexiones[nombresAutores[j]].emplace_back(nombresAutores[i], 1);
             }
         }
